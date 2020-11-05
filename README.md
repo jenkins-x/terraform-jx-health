@@ -3,7 +3,6 @@
 Terraform module for applying a base set of Helm charts used to setup Jenkins X on a cluster created by Terraform.
 
 Helm charts that are installed
-- [`jx-git-operator`](https://github.com/jenkins-x/jx-git-operator) - used to install and upgrade Jenkins X via GitOps
 - [`kuberhealthy`](https://github.com/Comcast/kuberhealthy) - used to run and report health checks
 - [`jx-kh-checks`](https://github.com/jenkins-x-plugins/jx-kh-check/tree/master/cmd) - base set of health checks used to verify the health of the cluster and Jenkins X installation.
 
