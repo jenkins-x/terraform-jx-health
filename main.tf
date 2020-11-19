@@ -83,3 +83,36 @@ resource "helm_release" "health-checks-install" {
     helm_release.kuberhealthy
   ]
 }
+
+resource "helm_release" "terraform_drift_check" {
+  count            = var.jx_git_url != "" ? 1 : 0
+  provider         = helm
+  name             = "terraform-drift-check"
+  chart            = "kuberhealthy-terraform-drift-check"
+  namespace        = "jx-git-operator"
+  repository       = "https://storage.googleapis.com/jenkinsxio/charts"
+  create_namespace = true
+
+  set {
+    name  = "terraformHealth.git.url"
+    value = var.jx_git_url
+  }
+
+  set {
+    name  = "terraformHealth.git.username"
+    value = var.jx_bot_username
+  }
+
+  set_sensitive {
+    name  = "terraformHealth.secretEnv.GIT_TOKEN"
+    value = var.jx_bot_token
+  }
+
+  lifecycle {
+    ignore_changes = all
+  }
+
+  depends_on = [
+    helm_release.kuberhealthy
+  ]
+}
