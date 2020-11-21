@@ -108,6 +108,15 @@ resource "helm_release" "terraform_drift_check" {
     value = var.jx_bot_token
   }
 
+  dynamic "set" {
+    for_each = var.tf_drift_secret_map
+    content {
+      name  = "terraformHealth.secretEnv.${set.key}"
+      value = set.value
+      type  = "string"
+    }
+  }
+
   lifecycle {
     ignore_changes = all
   }
