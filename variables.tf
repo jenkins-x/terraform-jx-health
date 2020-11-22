@@ -15,3 +15,8 @@ variable "jx_bot_token" {
   type        = string
   default     = ""
 }
+variable "tf_drift_secret_map" {
+  description = "Map of secrets to provide as secret environment variables to the terraform drift health check"
+  type = map(string)
+  default = {}
+}
