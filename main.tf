@@ -46,6 +46,14 @@ resource "helm_release" "cluster-checks" {
     value = true
   }
   set {
+    name  = "check.podRestarts.enabled"
+    value = true
+  }
+  set {
+    name  = "check.podRestarts.allNamespaces"
+    value = true
+  }
+  set {
     name  = "jxSecrets.enabled"
     value = true
   }
