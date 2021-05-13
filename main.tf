@@ -2,9 +2,9 @@ resource "helm_release" "kuberhealthy" {
   provider         = helm
   name             = "kuberhealthy"
   chart            = "kuberhealthy"
-  version          = "33"
+  version          = "64"
   namespace        = "kuberhealthy"
-  repository       = "https://comcast.github.io/kuberhealthy/helm-repos"
+  repository       = "https://kuberhealthy.github.io/kuberhealthy/helm-repos"
   create_namespace = true
 
   set {
