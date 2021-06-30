@@ -76,7 +76,7 @@ resource "helm_release" "health-checks-install" {
   name             = "health-checks-install"
   chart            = "jx-kh-check"
   namespace        = "jx-git-operator"
-  repository       = "https://storage.googleapis.com/jenkinsxio/charts"
+  repository       = "https://jenkins-x-charts.github.io/repo"
   create_namespace = true
 
   set {
