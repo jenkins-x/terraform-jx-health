@@ -34,7 +34,7 @@ resource "helm_release" "cluster-checks" {
   name             = "cluster-checks"
   chart            = "jx-kh-check"
   namespace        = "kuberhealthy"
-  repository       = "https://storage.googleapis.com/jenkinsxio/charts"
+  repository       = "https://jenkins-x-charts.github.io/repo"
   create_namespace = true
 
   set {
