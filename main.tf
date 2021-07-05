@@ -35,6 +35,7 @@ resource "helm_release" "cluster-checks" {
   chart            = "jx-kh-check"
   namespace        = "kuberhealthy"
   repository       = "https://jenkins-x-charts.github.io/repo"
+  version          = var.jx_kh_check_version
   create_namespace = true
 
   set {
@@ -77,6 +78,7 @@ resource "helm_release" "health-checks-install" {
   chart            = "jx-kh-check"
   namespace        = "jx-git-operator"
   repository       = "https://jenkins-x-charts.github.io/repo"
+  version          = var.jx_kh_check_version
   create_namespace = true
 
   set {
@@ -100,6 +102,7 @@ resource "helm_release" "terraform_drift_check" {
   chart            = "kuberhealthy-terraform-drift-check"
   namespace        = "jx-git-operator"
   repository       = "https://storage.googleapis.com/jenkinsxio/charts"
+  version          = var.kuberhealthy_terraform_drift_check_version
   create_namespace = true
 
   set {
