@@ -101,7 +101,7 @@ resource "helm_release" "terraform_drift_check" {
   name             = "terraform-drift-check"
   chart            = "kuberhealthy-terraform-drift-check"
   namespace        = "jx-git-operator"
-  repository       = "https://storage.googleapis.com/jenkinsxio/charts"
+  repository       = "https://github.com/jenkins-x-charts/repo"
   version          = var.kuberhealthy_terraform_drift_check_version
   create_namespace = true
 
