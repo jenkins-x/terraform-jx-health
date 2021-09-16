@@ -95,45 +95,45 @@ resource "helm_release" "health-checks-install" {
   ]
 }
 
-resource "helm_release" "terraform_drift_check" {
-  count            = var.jx_git_url != "" ? 1 : 0
-  provider         = helm
-  name             = "terraform-drift-check"
-  chart            = "kuberhealthy-terraform-drift-check"
-  namespace        = "jx-git-operator"
-  repository       = "https://github.com/jenkins-x-charts/repo"
-  version          = var.kuberhealthy_terraform_drift_check_version
-  create_namespace = true
+# resource "helm_release" "terraform_drift_check" {
+#   count            = var.jx_git_url != "" ? 1 : 0
+#   provider         = helm
+#   name             = "terraform-drift-check"
+#   chart            = "kuberhealthy-terraform-drift-check"
+#   namespace        = "jx-git-operator"
+#   repository       = "https://github.com/jenkins-x-charts/repo"
+#   version          = var.kuberhealthy_terraform_drift_check_version
+#   create_namespace = true
 
-  set {
-    name  = "terraformHealth.git.url"
-    value = var.jx_git_url
-  }
+#   set {
+#     name  = "terraformHealth.git.url"
+#     value = var.jx_git_url
+#   }
 
-  set {
-    name  = "terraformHealth.git.username"
-    value = var.jx_bot_username
-  }
+#   set {
+#     name  = "terraformHealth.git.username"
+#     value = var.jx_bot_username
+#   }
 
-  set_sensitive {
-    name  = "terraformHealth.secretEnv.GIT_TOKEN"
-    value = var.jx_bot_token
-  }
+#   set_sensitive {
+#     name  = "terraformHealth.secretEnv.GIT_TOKEN"
+#     value = var.jx_bot_token
+#   }
 
-  dynamic "set" {
-    for_each = var.tf_drift_secret_map
-    content {
-      name  = "terraformHealth.secretEnv.${set.key}"
-      value = set.value
-      type  = "string"
-    }
-  }
+#   dynamic "set" {
+#     for_each = var.tf_drift_secret_map
+#     content {
+#       name  = "terraformHealth.secretEnv.${set.key}"
+#       value = set.value
+#       type  = "string"
+#     }
+#   }
 
-  lifecycle {
-    ignore_changes = all
-  }
+#   lifecycle {
+#     ignore_changes = all
+#   }
 
-  depends_on = [
-    helm_release.kuberhealthy
-  ]
-}
+#   depends_on = [
+#     helm_release.kuberhealthy
+#   ]
+# }
